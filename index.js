@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+
 const persons = [
     { 
       "id": "1",
@@ -29,6 +30,16 @@ app.get('/', (request, response) => {
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+})
+
+app.get('/info', (request, response) => {
+    const date = new Date()
+    response.send(
+        `<div>
+            <p>Phonebook has info for ${persons.length} people</p>
+            <p>${date.toDateString()} ${date.toTimeString()}</p>
+        </div>`
+    )
 })
 
 
