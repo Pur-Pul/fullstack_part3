@@ -45,6 +45,11 @@ app.post('/api/persons', (request, response) => {
           error: 'number missing' 
         })
     }
+    if (persons.find(person => person.name === body.name)) {
+        return response.status(400).json({ 
+            error: 'name already exists in phonebook' 
+        })
+    }
     const id = Math.floor(Math.random() * 1000)
     console.log(id)
     const person = {
