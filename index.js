@@ -1,8 +1,9 @@
 const express = require('express')
 var morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 app.use(express.json())
-
+app.use(cors())
 app.use(
     morgan(function (tokens, req, res) {
         let log = [
@@ -70,9 +71,9 @@ app.post('/api/persons', (request, response) => {
     const id = Math.floor(Math.random() * 1000)
     console.log(id)
     const person = {
+        id: id.toString(),
         name: body.name,
-        number: body.number,
-        id: id,
+        number: body.number
     }
 
     persons = persons.concat(person)
@@ -93,7 +94,6 @@ app.get('/api/persons/:id', (request, response) => {
 app.delete('/api/persons/:id', (request, response) => {
     const id = request.params.id
     persons = persons.filter(person => person.id !== id)
-
     response.status(204).end()
 })
 
