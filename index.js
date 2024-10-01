@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 const express = require('express')
 const app = express()
 app.use(express.static('dist'))
@@ -61,7 +61,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 app.delete('/api/persons/:id', (request, response, next) => {
     const id = request.params.id
     Person.findByIdAndDelete(id)
-        .then(result => {
+        .then(() => {
             response.status(204).end()
         })
         .catch(error => next(error))
@@ -85,7 +85,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.get('/info', (request, response, next) => {
     const date = new Date()
-    Person.countDocuments({}, { hint: "_id_"})
+    Person.countDocuments({}, { hint: '_id_'})
         .then(result => {
             response.send(
                 `<div>
