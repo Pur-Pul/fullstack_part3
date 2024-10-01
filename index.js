@@ -70,16 +70,15 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    const id = Math.floor(Math.random() * 1000)
-    console.log(id)
-    const person = {
-        id: id.toString(),
+    const person = new Person({
         name: body.name,
         number: body.number
-    }
-
-    persons = persons.concat(person)
-    response.json(person)
+    })
+    person.save().then(result => {
+        console.log(`Added ${result.name} number ${result.number} to phonebook`)
+        persons = persons.concat(result)
+        response.json(result)
+    })
 })
 
 app.get('/api/persons/:id', (request, response) => {
