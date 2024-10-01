@@ -16,8 +16,7 @@ if (process.argv.length == 5) {
 
 
 
-const url =
-  `mongodb+srv://axbergsamuel:${password}@phonebook.fmxfz.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=phonebook`
+const url = `mongodb+srv://axbergsamuel:${password}@phonebook.fmxfz.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=phonebook`
 
 mongoose.set('strictQuery',false)
 
