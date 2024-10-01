@@ -1,11 +1,12 @@
 require('dotenv').config();
+const express = require('express')
+const app = express()
 app.use(express.static('dist'))
 app.use(express.json())
-const express = require('express')
 var morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-const app = express()
+
 
 app.use(cors())
 app.use(
@@ -114,7 +115,20 @@ app.delete('/api/persons/:id', (request, response, next) => {
     response.status(204).end()
 })
 
-
+app.put('/api/persons/:id', (request, response, next) => {
+    const id = request.params.id
+    const body = request.body
+    const person = {
+        name: body.name,
+        number: body.number
+    }
+    Person.findByIdAndUpdate(id, person, { new: true })
+        .then(result => {
+            response.json(result)
+        })
+        .catch(error => next(error))
+    
+})
 
 app.get('/info', (request, response) => {
     const date = new Date()
